@@ -1,0 +1,26 @@
+{
+    "name": "RPi Pico DHT",
+    "version": "1.0.0",
+    "description": "Biblioteca para usar sensores de la familia DHT en la Raspberry Pi Pico con el SDK.",
+    "keywords": "rp2040, Raspberry Pi Pico, baremetal, PIO",
+    "repository":
+    {
+      "type": "git",
+      "url": "https://github.com/carlassaraf/rpipico-dht.git"
+    },
+    "authors":
+    [
+        {
+            "name": "Valentin Milea",
+            "email": "valentin.milea@gmail.com"
+        },
+        {
+            "name": "Fabrizio Carlassara",
+            "email": "fabrizio.carlassara@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "homepage": "",
+    "frameworks": ["baremetal"],
+    "platforms": ["WizIO-pico"]
+}
