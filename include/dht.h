@@ -18,6 +18,6 @@ typedef enum {
 // Prototipos de funciones
 
 void dht_init(uint8_t gpio);
-dht_status_t dht_read(float *humidity, float *temp_c,);
+dht_status_t dht_read(float *humidity, float *temp_c);
 
 #endif // _DHT_H_
