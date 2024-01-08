@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2023 Fabrizio Carlassara <fabrizio.carlassara@gmail.com>
- */
+*/
 
 #ifndef _DHT_H_
 #define _DHT_H_

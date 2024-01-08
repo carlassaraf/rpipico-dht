@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023 Fabrizio Carlassara <fabrizio.carlassara@gmail.com>
+*/
+
 #include "dht.h"
 
 // Variable para guardar el numero de GPIO usado
@@ -72,7 +76,7 @@ dht_status_t dht_read(float *humidity, float *temp_c) {
                 *temp_c = data[2];
             }
             if (data[2] & 0x80) {
-                *temp_c = -(*temp_celsius);
+                *temp_c = -(*temp_c);
             }
             // Todo ok
             return DHT_OK;
