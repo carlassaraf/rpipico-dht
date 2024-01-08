@@ -21,8 +21,9 @@ void dht_init(uint8_t gpio) {
  * @brief Hace una lectura del DHT
  * @param humidity puntero a donde guardar el valor de humedad
  * @param temp_c puntero a donde guardar el valor de temperatura
+ * @return devuelve un codigo de error
 */
-void dht_read(float *humidity, float *temp_c) {
+dht_status_t dht_read(float *humidity, float *temp_c) {
     // Array para guardar los 5 bytes de datos
     uint8_t data[5] = {0, 0, 0, 0, 0};
     // Variables auxiliares
@@ -57,21 +58,31 @@ void dht_read(float *humidity, float *temp_c) {
         }
     }
 
-    // Verifico que hayan llegado los 40 bits y que el checksum sea el correcto
-    if ((j >= 40) && (data[4] == ((data[0] + data[1] + data[2] + data[3]) & 0xFF))) {
-        //
-        *humidity = (float) ((data[0] << 8) + data[1]) / 10;
-        if (*humidity > 100) {
-            *humidity = data[0];
+    // Verifico que hayan llegado los 40 bits
+    if (j >= 40) {
+        // y que el checksum sea el correcto
+        if(data[4] == ((data[0] + data[1] + data[2] + data[3]) & 0xFF)) {
+            // Armo los datos de humedad y temperatura
+            *humidity = (float) ((data[0] << 8) + data[1]) / 10;
+            if (*humidity > 100) {
+                *humidity = data[0];
+            }
+            *temp_c = (float) (((data[2] & 0x7F) << 8) + data[3]) / 10;
+            if (*temp_c > 125) {
+                *temp_c = data[2];
+            }
+            if (data[2] & 0x80) {
+                *temp_c = -(*temp_celsius);
+            }
+            // Todo ok
+            return DHT_OK;
         }
-        *temp_c = (float) (((data[2] & 0x7F) << 8) + data[3]) / 10;
-        if (*temp_c > 125) {
-            *temp_c = data[2];
-        }
-        if (data[2] & 0x80) {
-            *temp_c = -(*temp_celsius);
+        else {
+            // Error de checksum
+            return DHT_BAD_CHECKSUM;
         }
     } else {
-        printf("Bad data\n");
+        // Error de timeout
+        return DHT_TIMEOUT;
     }
 }
