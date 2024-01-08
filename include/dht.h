@@ -11,6 +11,6 @@
 // Prototipos de funciones
 
 void dht_init(uint8_t gpio);
-void dht_read(float *temp_c, float humidity);
+void dht_read(float *temp_c, float *humidity);
 
 #endif // _DHT_H_
