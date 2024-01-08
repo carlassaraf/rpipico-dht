@@ -1,5 +1,4 @@
 #include "dht.h"
-#include "pico/stdlib.h"
 
 // Variable para guardar el numero de GPIO usado
 static uint8_t dht_gpio;
