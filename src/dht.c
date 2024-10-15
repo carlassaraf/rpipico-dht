@@ -57,7 +57,7 @@ dht_status_t dht_read(float *humidity, float *temp_c) {
 
         if ((i >= 4) && (i % 2 == 0)) {
             data[j / 8] <<= 1;
-            if (count > 16) data[j / 8] |= 1;
+            if (count > 46) data[j / 8] |= 1;
             j++;
         }
     }
